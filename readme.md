@@ -1,26 +1,11 @@
-# Project Setup Helpers
+# Project Read Me
 
-### Prerequisites
+To run: 
+1. Run `yarn dev`
+2. In a separate command window start the server `yarn run server` (see server ReadMe for more info)
+
+
+### Dependencies
 1. Make sure you have a recent version of node installed
 2. Make sure you have yarn installed
-
-
-### Basic Vue Scaffold
-To get the basic vue scaffold started, execute the command:
-
-Note I prefer using the yarn package manager...
-```
-yarn create vue
-```
-
-If you want to use npm:
-```
-npm create vue@3
-```
-
-Follow the prompts and put in whatever values you want, but make sure you hit "YES" for adding typescript support, JSX support, Pinia for state manamgent, and the Vue Router. 
-
-Follow the directions to make sure your initial project compiles and can be started.
-
-If you are using VSCode make sure you have the "Volar" plugin installed.
 
