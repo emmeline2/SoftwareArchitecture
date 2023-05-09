@@ -1,7 +1,8 @@
-export interface StudentApiInterface {
-    studentId: string,
-    studentName: string,
-    courseId: string
+export interface RepoApiInterface {
+    repoID: string,
+    name: string,
+    description: string,
+    mainLanguage: string
 }
 
 export interface ApiErrorInterface {

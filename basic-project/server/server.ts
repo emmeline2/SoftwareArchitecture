@@ -10,7 +10,7 @@ server.register(cors, {
     origin: "*"
 })
 
-server.get('/students', async (request, reply) => {
+server.get('/repos', async (request, reply) => {
   return MockData;
 })
 
@@ -24,13 +24,13 @@ interface requestId extends RequestGenericInterface {
 //Now in the .get make sure you stereotype the request <requestId> and
 //then you can get the parameter like in the second line with const
 //thus /student/123 will pull 123 out of the constant
-server.get<requestId>('/students/:id', async (request, reply) => {
+server.get<requestId>('/repos/:id', async (request, reply) => {
     const { id } = request.params;
-    const student = MockData.find(element => element.studentId == id);
-    if (student) {
-        return student;
+    const repo = MockData.find(element => element.repoID == id);
+    if (repo) {
+        return repo;
     } else {
-        let errObj = {error: `The student with student id = ${id} was not found`};
+        let errObj = {error: `The repo with id = ${id} was not found`};
         reply.code(404).send(errObj);
         return
     }
@@ -42,35 +42,36 @@ server.get<requestId>('/students/:id', async (request, reply) => {
 interface requestQry extends RequestGenericInterface {
     Querystring: {
       id: string,
-      course: string
+      name: string
     }
 }
+
 //Now in the .get make sure you stereotype the request <requestId> and
 //then you can get the parameter like in the second line with const
 //thus /student/123 will pull 123 out of the constant
 server.get<requestQry>('/search', async (request, reply) => {
-    const { id,course } = request.query;
+    const { id,name } = request.query;
     
     if (id){
-        const student = MockData.find(element => element.studentId == id);
-        if (student) {
-            return [student];
+        const repo = MockData.find(element => element.repoID == id);
+        if (repo) {
+            return [repo];
         } else {
             let errObj = {error: `The student with student id = ${id} was not found`};
             reply.code(404).send(errObj);
             return
         }
-    }else if (course){
-        const students = MockData.filter(element => element.courseId == course);
-        if (students.length > 0) {
-            return students;
+    }else if (name){
+        const repos = MockData.filter(element => element.name == name);
+        if (repos.length > 0) {
+            return repos;
         } else {
-            let errObj = {error: `The no students were found with course id = ${course} was not found`};
+            let errObj = {error: `No repos were found with name = ${name}`};
             reply.code(404).send(errObj);
             return
         }
     }else {
-        let errObj = {error: "The /search API requires an id or course query parameter"};
+        let errObj = {error: "The /search API requires an id or name parameter"};
         reply.code(400).send(errObj);
         return
     }

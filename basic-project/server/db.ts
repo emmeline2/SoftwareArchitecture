@@ -1,18 +1,27 @@
 
 export const MockData = [
     {
-        studentId: "123",
-        studentName: "John Doe",
-        courseId: "se577"
+        repoID: "1",
+        name: "Music Map", 
+        description: "map of artists", 
+        mainLanguage: "python"
     },
     {
-        studentId: "456",
-        studentName: "Jane Doe",
-        courseId: "se577"
+        repoID: "2",
+        name: "RubiksCube", 
+        description: "rubiks cube solver", 
+        mainLanguage: "python"
     },
     {
-        studentId: "789",
-        studentName: "Tim Doe",
-        courseId: "se577"
-    }    
+        repoID: "3",
+        name: "DrexelBikeShare", 
+        description: "bike sharing website", 
+        mainLanguage: "HTML/CSS"
+    },
+    {
+        repoID: "4",
+        name: "emmeline2.github.io", 
+        description: "personal web page", 
+        mainLanguage: "HTML/CSS"
+    }
 ];
