@@ -1,11 +1,11 @@
 # Project Read Me
 
 To run: 
-1. Run `yarn` to check for updated included pacakges.
-2. Run `yarn dev`
-3. Navigate to the server folder
-4. In the server folder, create a file .env and enter the provided github token in a variable like this: GH_ACCESS_TOKEN=`<token>`
-5. In a separate command window start the server `yarn run server` from within that folder (see the server ReadMe for more info)
+1. Navigate to the client folder and run `yarn` to check for updated include pacakges.
+2. Run `yarn dev` from the same folder.
+3. Navigate to the server folder and run `yarn`.
+4. Then in the server folder, create a file .env and enter the provided github token in a variable like this: GH_ACCESS_TOKEN=`<token>`
+5. Start the server by running `yarn run server` from within the server folder (see the server ReadMe for more info).
 
 
 ### Dependencies
