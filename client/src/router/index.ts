@@ -23,9 +23,9 @@ const router = createRouter({
       component: () => import('../pages/AboutPage.vue')
     },
     {
-      path: '/project',
-      name: 'project',
-      component: () => import('../pages/ProjectPage.vue')
+      path: '/search',
+      name: 'search',
+      component: () => import('../pages/SearchPage.vue')
     },
     {
       path: '/repos',

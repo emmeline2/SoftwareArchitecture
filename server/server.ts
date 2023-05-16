@@ -1,8 +1,8 @@
-import  {MockData}  from "./db";
 import fastify, {RequestGenericInterface} from "fastify";
 import fastifyHttpProxy from "@fastify/http-proxy";
 import dotenv from 'dotenv';
 import cors from '@fastify/cors';
+import {GetGHProxySecureOptions, GetGHProxyOptions } from "./proxy";
 
 dotenv.config();
 const server = fastify()
@@ -18,77 +18,96 @@ server.register(cors, {
     origin: "*"
 })
 
-//setup CORS - this will be necessary for API requests from a VUE or any SPA app 
-server.register(cors, {
-    origin: "*"
-})
 
-server.get('/repos', async (request, reply) => {
-  return MockData;
-})
+server.get('/repos', async (request, reply) => { 
+  try {
+    const response = await fetch(`https://api.github.com/users/emmeline2/repos`, {
+      headers: {
+        Authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}`,
+        'User-Agent': 'Your-User-Agent'
+      }
+    });
 
-//If you want to pass a parameter like /student/123 setup an interface
-//for the parameter
-interface requestId extends RequestGenericInterface {
-    Params: {
-      id: string
-    }
-}
-//Now in the .get make sure you stereotype the request <requestId> and
-//then you can get the parameter like in the second line with const
-//thus /student/123 will pull 123 out of the constant
-server.get<requestId>('/repos/:id', async (request, reply) => {
-    const { id } = request.params;
-    const repo = MockData.find(element => element.repoID == id);
-    if (repo) {
-        return repo;
+    if (response.status === 200) {
+      const repo = await response.json();
+      return repo;
+    } else if (response.status === 404) {
+      reply.code(404).send({ error: `repo was not found` });
     } else {
-        let errObj = {error: `The repo with id = ${id} was not found`};
-        reply.code(404).send(errObj);
-        return
+      reply.code(response.status).send({ error: 'An error occurred while fetching the repository data' });
     }
-  })
+  } catch (error) {
+    console.error('Error:', error);
+    reply.code(500).send({ error: 'An error occurred while fetching the repository data' });
+  }
+});
 
-
-//If you want to pass a parameter like /student/123 setup an interface
-//for the parameter
-interface requestQry extends RequestGenericInterface {
-    Querystring: {
-      id: string,
-      name: string
-    }
+interface requestId extends RequestGenericInterface {
+  Params: {
+    id: string,
+    name: string
+  }
 }
 
-//Now in the .get make sure you stereotype the request <requestId> and
-//then you can get the parameter like in the second line with const
-//thus /student/123 will pull 123 out of the constant
-server.get<requestQry>('/search', async (request, reply) => {
-    const { id,name } = request.query;
-    
-    if (id){
-        const repo = MockData.find(element => element.repoID == id);
-        if (repo) {
-            return [repo];
-        } else {
-            let errObj = {error: `The student with student id = ${id} was not found`};
-            reply.code(404).send(errObj);
-            return
+server.get<requestId>('/search', async (request, reply) => {
+  const { id, name } = request.params;
+  
+  if(id){
+    try {
+      const response = await fetch(`https://api.github.com/search/repositories?q=emmeline2`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}`,
+          'User-Agent': 'Your-User-Agent'
         }
-    }else if (name){
-        const repos = MockData.filter(element => element.name == name);
-        if (repos.length > 0) {
-            return repos;
-        } else {
-            let errObj = {error: `No repos were found with name = ${name}`};
-            reply.code(404).send(errObj);
-            return
-        }
-    }else {
-        let errObj = {error: "The /search API requires an id or name parameter"};
-        reply.code(400).send(errObj);
-        return
+      });
+  
+      if (response.status === 200) {
+        const repo = await response.json();
+        return repo;
+      } else if (response.status === 404) {
+        reply.code(404).send({ error: `The repo with id = ${id} was not found` });
+      } else {
+        reply.code(response.status).send({ error: 'An error occurred while fetching the repository data' });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      reply.code(500).send({ error: 'An error occurred while fetching the repository data' });
     }
-  })
+  }
+  else if (name){
+    try {
+      const response = await fetch(`https://api.github.com/users/emmeline2/repos/name=${name}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}`,
+          'User-Agent': 'Your-User-Agent'
+        }
+      });
+  
+      if (response.status === 200) {
+        const repo = await response.json();
+        return repo;
+      } else if (response.status === 404) {
+        reply.code(404).send({ error: `The repo with name=${name} was not found` });
+      } else {
+        reply.code(response.status).send({ error: 'An error occurred while fetching the repository data' });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      reply.code(500).send({ error: 'An error occurred while fetching the repository data' });
+    }
+
+  }
+  else{
+      let errObj = {error: `The search API requires an id or name query parameter. name=${name} and id = ${id}.`};
+      reply.code(400).send(errObj);
+      return
+  }
+
+
+  
+});
+
+
 
 server.listen({ port: 9500 }, (err, address) => {
   if (err) {

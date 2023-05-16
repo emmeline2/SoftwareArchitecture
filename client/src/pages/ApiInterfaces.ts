@@ -1,8 +1,10 @@
 export interface RepoApiInterface {
-    repoID: string,
+    id: string,
+    updated_at: string,
     name: string,
     description: string,
-    mainLanguage: string
+    language: string, 
+    html_url : string
 }
 
 export interface ApiErrorInterface {

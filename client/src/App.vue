@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import AboutPage from './pages/AboutPage.vue'
 import ReposPage from './pages/ReposPage.vue'
-import ProjectPage from './pages/ProjectPage.vue'
+import SearchPage from './pages/SearchPage.vue'
 
 </script>
 
@@ -14,7 +14,7 @@ import ProjectPage from './pages/ProjectPage.vue'
     <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">AboutPage</RouterLink>
-        <RouterLink to="/project">ProjectPage</RouterLink>
+        <RouterLink to="/search">SearchPage</RouterLink>
         <RouterLink to="/repos">ReposPage</RouterLink>
       </nav>
       <hr/>

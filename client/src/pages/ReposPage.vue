@@ -1,22 +1,28 @@
 <template>
-  <p> This is the Repo page</p>
+  <p> This is a list for all repositories: </p>
 
-  <!-- Only render this table if there is student data-->
-  <div v-if="repoData.length > 0">
-    <table>
-      <tr>
-        <th>Repo ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Main Language</th>
-      </tr>
-      <tr v-for = "(repo, rowNum) in repoData">
-        <td>{{ repo.repoID }}</td>
-        <td>{{ repo.name }}</td>
-        <td>{{ repo.description }}</td>
-        <td>{{ repo.mainLanguage }}</td>
-      </tr>
-    </table>
+  <!-- Only render this table if there is repo data-->
+  <div v-if="repoData.length > 0" class="table-responsive">
+    <container> 
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th class="offset-2">ID</th>
+          <th>Last Updated</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Language</th>
+          <th>URL</th>
+        </tr>
+        <tr v-for = "(repo, rowNum) in repoData">
+          <td>{{ repo.id }}</td>
+          <td>{{ repo.updated_at }}</td>
+          <td>{{ repo.name }}</td>
+          <td>{{ repo.description }}</td>
+          <td>{{ repo.language }}</td>
+          <td><a href="{{ repo.html_url }}">link</a></td>
+        </tr>
+      </table>
+    </container>
   </div>
   <p>The number of results is {{ repoData.length }}</p>
 </template>
@@ -38,10 +44,10 @@
   onMounted(async () => {
     console.log("Page 1 mounted")
 
-    //this is where to go and get the student data
+    //this is where to go and get the repo data
     let allReposURI = 'http://localhost:9500/repos'
 
-    //Use axios to load the student data - readup on await to make
+    //Use axios to load the repo data - readup on await to make
     //async calls easier
     let repoAPI = await axios.get<RepoApiInterface[]>(allReposURI)
 
