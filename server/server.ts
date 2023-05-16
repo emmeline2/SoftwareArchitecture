@@ -44,17 +44,16 @@ server.get('/repos', async (request, reply) => {
 
 interface requestId extends RequestGenericInterface {
   Params: {
-    id: string,
-    name: string
+    id: string
   }
 }
 
-server.get<requestId>('/search', async (request, reply) => {
-  const { id, name } = request.params;
+server.get<requestId>('/search:id', async (request, reply) => {
+  const { id } = request.params;
   
   if(id){
     try {
-      const response = await fetch(`https://api.github.com/search/repositories?q=emmeline2`, {
+      const response = await fetch(`https://api.github.com/users/emmeline2/repos`, {
         headers: {
           Authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}`,
           'User-Agent': 'Your-User-Agent'
@@ -74,36 +73,11 @@ server.get<requestId>('/search', async (request, reply) => {
       reply.code(500).send({ error: 'An error occurred while fetching the repository data' });
     }
   }
-  else if (name){
-    try {
-      const response = await fetch(`https://api.github.com/users/emmeline2/repos/name=${name}`, {
-        headers: {
-          Authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}`,
-          'User-Agent': 'Your-User-Agent'
-        }
-      });
-  
-      if (response.status === 200) {
-        const repo = await response.json();
-        return repo;
-      } else if (response.status === 404) {
-        reply.code(404).send({ error: `The repo with name=${name} was not found` });
-      } else {
-        reply.code(response.status).send({ error: 'An error occurred while fetching the repository data' });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      reply.code(500).send({ error: 'An error occurred while fetching the repository data' });
-    }
-
-  }
   else{
-      let errObj = {error: `The search API requires an id or name query parameter. name=${name} and id = ${id}.`};
+      let errObj = {error: `The search API requires an id query parameter. id=${id}.`};
       reply.code(400).send(errObj);
       return
   }
-
-
   
 });
 

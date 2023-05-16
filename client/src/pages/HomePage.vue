@@ -1,7 +1,5 @@
 <template>
-  <p> This is the home page. <br/> Im changing this now</p>
-  <p> paragraph 2</p>
-  <p> This is the <span class="emphasis-text">HOME</span> page</p>
+  <p> This is the home page. Welcome! </p>
 </template>
   
 <script lang="ts">

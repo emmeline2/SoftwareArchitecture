@@ -84,7 +84,7 @@
   const fetchRepoInfo = async () =>{
     queryIsDirty.value = false
 
-    const apiPrefix = (queryOption.value == "RepoID") ? queryByRepoIdPrefix : queryByRepoNamePrefix
+    const apiPrefix = (queryOption.value == "RepoID") ? queryByRepoNamePrefix : queryByRepoIdPrefix
     const apiURL = apiPrefix + queryValue.value
     console.log(apiURL)
     try{
