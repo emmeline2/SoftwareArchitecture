@@ -12,8 +12,8 @@ To run:
 1. Make sure you have a recent version of node installed
 2. Make sure you have yarn installed
 
-Architecture Model (ArchitectureModel.pdf):
+### Architecture Model (ArchitectureModel.pdf):
 ![alt text](ArchitectureModel.jpg "Architecture Model")
 
-The repos page should look like this: 
+### The repos page should look like this: 
 ![alt text](reposPage.jpg "Repos Page")
