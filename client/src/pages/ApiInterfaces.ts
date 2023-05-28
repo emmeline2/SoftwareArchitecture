@@ -7,6 +7,12 @@ export interface RepoApiInterface {
     html_url : string
 }
 
+export interface GistApiInterface {
+    id: string,
+    url: string,
+    html_url: string
+}
+
 export interface ApiErrorInterface {
     isError: boolean,
     errorCode: number,

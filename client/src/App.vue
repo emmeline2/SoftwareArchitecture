@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 //import RouterLink  from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import AboutPage from './pages/AboutPage.vue'
+import RateMyGistPage from './pages/RateMyGistPage.vue'
 import ReposPage from './pages/ReposPage.vue'
 import SearchPage from './pages/SearchPage.vue'
 
@@ -13,9 +13,9 @@ import SearchPage from './pages/SearchPage.vue'
   <header>
     <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">AboutPage</RouterLink>
-        <RouterLink to="/search">SearchPage</RouterLink>
-        <RouterLink to="/repos">ReposPage</RouterLink>
+        <RouterLink to="/repos">View All Repos</RouterLink>
+        <RouterLink to="/search">Search The Repo</RouterLink>
+        <RouterLink to="/rate">Rate My Gist</RouterLink>
       </nav>
       <hr/>
   </header>
