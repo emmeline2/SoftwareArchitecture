@@ -1,6 +1,6 @@
 <template>
   <p> This is the Rate My Gist page</p>
-  
+  <pre id="gist-code">{{ gistData }}</pre>
 
   </template>
     
@@ -27,6 +27,7 @@
       //Use axios to load the repo data - readup on await to make
       //async calls easier
       let gistAPI = await axios.get<GistApiInterface[]>(gistURI)
+      //const url = `https://api.github.com/gists/${gistId}`;
   
       //if OK, set the repoData variable, so that we can render in the ui
       if(gistAPI.status == 200){
