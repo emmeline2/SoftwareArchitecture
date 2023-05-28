@@ -27,11 +27,11 @@
   <p>The number of results is {{ repoData.length }}</p>
 </template>
   
-    <script lang="ts">
-    export default {
-      name: 'ReposPage',
-    };
-    </script>
+  <script lang="ts">
+  export default {
+    name: 'ReposPage',
+  };
+  </script>
   
   <script setup lang="ts">
   import { onMounted, ref } from 'vue';
