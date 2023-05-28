@@ -1,6 +1,26 @@
 <template>
   <p> This is the Rate My Gist page</p>
-  <pre id="gist-code">{{ gistData }}</pre>
+    <div v-if="gistData.length > 0" class="table-responsive">
+      <container> 
+        <table class="table table-bordered table-striped">
+          <tr>
+            <th class="offset-2">ID</th>
+            <th>Last Updated</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Language</th>
+            <th>URL</th>
+          </tr>
+          <tr v-for = "(gist, rowNum) in gistData">
+            <td>{{ gist.id }}</td>
+            <td>{{ gist.url }}</td>
+            <td>{{ gist.html_url }}</td>
+            <td>{{ gist.files }}</td>
+          </tr>
+        </table>
+      </container>
+    </div>
+    <p>The number of results is {{ gistData.length }}</p>
 
   </template>
     
@@ -8,8 +28,9 @@
     export default {
       name: 'RateMyGistPage',
     };
+
+
     </script>
-    
     <script setup lang="ts">
     import { onMounted, ref } from 'vue';
     import type {GistApiInterface} from './ApiInterfaces';
@@ -22,12 +43,11 @@
       console.log("Page 1 mounted")
   
       //this is where to go and get the repo data
-      let gistURI = 'http://localhost:9500/gist'
+      let gistURI = 'http://localhost:9500/gists'
   
       //Use axios to load the repo data - readup on await to make
       //async calls easier
       let gistAPI = await axios.get<GistApiInterface[]>(gistURI)
-      //const url = `https://api.github.com/gists/${gistId}`;
   
       //if OK, set the repoData variable, so that we can render in the ui
       if(gistAPI.status == 200){
