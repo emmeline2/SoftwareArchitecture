@@ -4,6 +4,7 @@ import type {GistApiInterface} from './ApiInterfaces';
 import axios from 'axios';
 
 
+
 export default {
   name: 'RateMyGistPage',
   data() {
@@ -21,8 +22,34 @@ export default {
         const response = await axios.get<GistApiInterface[]>('http://localhost:9500/gists');
         if (response.status === 200) {
           this.gistData = response.data;
-          this.fetchData();
+          //this.fetchData();
+          for (const gist of this.gistData) {
+            
+            //const htmlResponse = await fetch(gist.html_url);
+            try{
+            const htmlResponse = await fetch(gist.html_url, {
+              headers: {
+                Authorization: `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`,
+                'User-Agent': 'Your-User-Agent'
+              },
+              mode: 'no-cors'
+            });
+            console.log("Made it here1");
+              if (htmlResponse.status === 200) {
+                const htmlContent = await htmlResponse.text();
+                this.fetchedCode = htmlContent;
+                console.log("Made it here");
+              }
+              else{
+                console.log(htmlResponse);
+              }
+            }
+            catch(e){
+              console.error('Error: ', e);
+            }
+      
         }
+      }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -33,6 +60,8 @@ export default {
         try {
           const response = await axios.get<GistApiInterface[]>(gist.html_url);
           const code = response.data; // Store the fetched code in a variable
+
+          
           this.fetchedCode += code; // Append the fetched code to the existing fetchedCode
         } catch (error) {
           console.error('Error:', error);
