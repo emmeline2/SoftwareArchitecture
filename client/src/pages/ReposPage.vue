@@ -1,5 +1,5 @@
 <template>
-  <p> This is a list for all repositories: </p>
+  <p class="heading"> This is a list for all my repositories: </p>
 
   <!-- Only render this table if there is repo data-->
   <div v-if="repoData.length > 0" class="table-responsive">
@@ -27,11 +27,11 @@
   <p>The number of results is {{ repoData.length }}</p>
 </template>
   
-    <script lang="ts">
-    export default {
-      name: 'ReposPage',
-    };
-    </script>
+  <script lang="ts">
+  export default {
+    name: 'ReposPage',
+  };
+  </script>
   
   <script setup lang="ts">
   import { onMounted, ref } from 'vue';
@@ -61,4 +61,10 @@
   </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped></style>
+  <style scoped>
+  .heading{
+    font-size: large;
+    font-weight: bold;
+    text-align: left;
+  }
+  </style>

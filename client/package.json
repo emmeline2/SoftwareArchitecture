@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@splidejs/vue-splide": "^0.6.12",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "nodemon": "^2.0.22",
