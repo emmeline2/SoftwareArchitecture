@@ -1,5 +1,5 @@
 <template>
-  <p> This is the home page. Welcome! </p>
+  <p class="heading"> Welcome to my page! </p>
   <div class="smallerCarousel">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -59,8 +59,6 @@
 </script>
 
 
-
-  
   <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .smallerCarousel{
@@ -80,4 +78,10 @@
 .carousel-inner{
     height:100%;
 }
+.heading{
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+  
 </style>

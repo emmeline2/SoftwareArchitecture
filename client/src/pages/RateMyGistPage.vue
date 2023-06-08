@@ -45,15 +45,16 @@ export default {
     },
   },
 };
+
 </script>
 
 <template>
   <div>
-    <p>This is the Rate My Gist page</p>
-    <script src="https://gist.github.com/emmeline2/48e8e866d0905e73f219fe9cb8283357.js"></script>
-    
+    <p class="heading">This is the Rate My Gist page</p>
+
     <pre id="content">{{ fetchedCode }}</pre>
 
+    <p class="heading">List of my Gists fetched from GitHub:</p>
     <div v-if="gistData.length > 0" class="table-responsive">
       <container>
         <table class="table table-bordered table-striped">
@@ -75,3 +76,11 @@ export default {
     <p>The number of results is {{ gistData.length }}</p>
   </div>
 </template>
+
+
+<style scoped>
+.heading{
+  font-size: medium;
+  font-weight: bold;
+}
+</style>

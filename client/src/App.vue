@@ -14,7 +14,7 @@ import SearchPage from './pages/SearchPage.vue'
     <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/repos">View All Repos</RouterLink>
-        <RouterLink to="/search">Search The Repo</RouterLink>
+        <RouterLink to="/search">Search For Repos</RouterLink>
         <RouterLink to="/rate">Rate My Gist</RouterLink>
       </nav>
       <hr/>
