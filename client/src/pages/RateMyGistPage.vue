@@ -50,6 +50,8 @@ export default {
 <template>
   <div>
     <p>This is the Rate My Gist page</p>
+    <script src="https://gist.github.com/emmeline2/48e8e866d0905e73f219fe9cb8283357.js"></script>
+    
     <pre id="content">{{ fetchedCode }}</pre>
 
     <div v-if="gistData.length > 0" class="table-responsive">
